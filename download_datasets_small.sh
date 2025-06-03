@@ -34,14 +34,14 @@ check_disk_space() {
     fi
 }
 
-# Enhanced download function with retries
+# Enhanced download function with retries and progress bar
 download_with_retry() {
     local url="$1"
     local output="$2"
     local retries=3
 
     for ((i=1; i<=retries; i++)); do
-        if wget -c --timeout=30 --tries=3 "$url" -O "$output"; then
+        if wget -c --timeout=30 --tries=3 --progress=bar:force:noscroll "$url" -O "$output"; then
             return 0
         fi
         log_progress "Download attempt $i failed for $url"
