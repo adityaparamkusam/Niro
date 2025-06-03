@@ -1,0 +1,12 @@
+Causal Transformer architecture – GPT-style blocks with masked multi-head self-attention, residual connections, LayerNorm, GELU activations and dropout.
+Learned token + positional embeddings – weight-tied output head shares parameters with the input embedding matrix.
+Special-token aware tokenisation – fast Hugging Face tokenizer with [PAD] and </s> (EOS) added.
+Autoregressive language-model objective – next-token cross-entropy loss and perplexity evaluation.
+Data handling pipeline – Arrow datasets, DataCollatorForLanguageModeling, PyTorch DataLoader, batch-first tensors, pad-masking.
+Optimisation – AdamW, cosine-annealing / one-cycle LR scheduler, mixed-precision (fp16) via 🤗 Accelerate, early stopping.
+Distributed training safety – all-reduce token & loss sums for correct multi-GPU perplexity.
+Model compression – global L1 unstructured pruning (20 %), dynamic INT8 quantisation of linear layers.
+Export & deployment – ONNX export (opset 17) with dynamic axes, inference on ONNX Runtime GPU or native PyTorch.
+Sampling for chat – top-k nucleus-style sampling with temperature, EOS stop condition.
+Check-pointing format – single .pt state-dict files for pre-train, fine-tune, pruned-quantised variants.
+Error-robust utilities – consistent file checks, vocab-size sanity, unified logging with rich, max-sequence constant.
