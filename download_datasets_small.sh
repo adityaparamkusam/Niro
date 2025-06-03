@@ -3,7 +3,7 @@
 set -e
 
 # Base directory setup
-BASE_DIR="$HOME/Downloads/techno/Niro/Data"
+BASE_DIR="$HOME/Niro/Data"
 echo "Creating directory structure in: $BASE_DIR"
 mkdir -p "$BASE_DIR"
 cd "$BASE_DIR"
