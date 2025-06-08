@@ -1,0 +1,29 @@
+pip install torch torchvision torchaudio datasets numpy transformers accelerate
+
+
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+pip install datasets numpy transformers accelerate
+
+# Core ML libraries
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+
+# For Apple Silicon (M1/M2) - use this instead of above
+pip install torch torchvision torchaudio
+
+# Dataset handling
+pip install datasets
+pip install numpy
+
+# Data structures and utilities
+pip install dataclasses-json
+
+# Optional but recommended
+pip install transformers
+pip install accelerate
+
+
+source venv/bin/activate
+
+source venv/bin/activate
+
+pip install --upgrade pip

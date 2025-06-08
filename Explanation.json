@@ -1,0 +1,24 @@
+Core Architecture: Niro is a custom-built GPT-inspired model with approximately 500 million parameters, designed to excel in natural language processing tasks, leveraging a transformer-based structure.
+
+Layer Depth: It features 36 transformer layers (up from 32), providing a deeper network to capture intricate patterns and long-range dependencies in text data.
+
+Attention Mechanism: Equipped with 20 attention heads per layer, enabling the model to simultaneously focus on multiple relevant parts of the input, enhancing contextual understanding.
+
+Embedding Dimension: Uses a 1280-dimensional embedding space, offering a rich representation of tokens while keeping computational demands manageable for practical deployment.
+
+Context Length: Supports a 1024-token context window, allowing it to process extended sequences such as full customer support transcripts or detailed reports.
+Dropout Optimization: Dropout is reduced to 0.05 from 0.1, a strategic adjustment to minimize overfitting, ensuring the model performs well on unseen data.
+Learning Rate Tuning: Implements a learning rate of 3e-4 with 2500 warmup steps, enabling a gradual ramp-up to optimize convergence and avoid early instability.
+Regularization: Incorporates a weight decay of 0.1 in the AdamW optimizer, adding regularization to prevent overfitting and maintain model robustness across datasets.
+Training Data Scale: Initially trained on 3 GB of tokenized data (e.g., news articles and stories), with the flexibility to scale up to 80 GB for broader domain coverage.
+Batch Processing: Handles batches of 2048 tokens with 8 gradient accumulation steps, designed to fit within 18 GB of unified memory, balancing throughput and memory efficiency.
+Hardware Compatibility: Optimized for Apple MPS (e.g., MacBook Pro M4) or EC2 CUDA environments, with a single NVIDIA A100 GPU estimated to train 3 GB data in 1-2 hours.
+Scalable Training: For 80 GB data, training on 8 A100 GPUs could reduce time to 1-2 hours, leveraging distributed computing for enterprise-scale datasets.
+Checkpointing: Automatically saves checkpoints every 1000 steps, providing a safety net for resuming training and enabling deployment at any point.
+Mixed Precision Training: Utilizes torch AMP for mixed precision training, cutting memory usage by half and potentially tripling training speed on supported hardware.
+Modular Design: Organized into modular Python files—config.py, dataset.py, model.py, and utils.py—allowing easy tweaking of hyperparameters or integration of new features.
+Data Handling: The ArrowStreamDataset class in dataset.py efficiently streams and samples large tokenized datasets, ensuring diverse training examples.
+Model Components: Includes a CausalSelfAttention mechanism and feedforward blocks in model.py, with weight tying between token embeddings and output layers to reduce parameters.
+Learning Rate Scheduling: Employs a cosine decay schedule in utils.py, dynamically adjusting the learning rate based on training progress for optimal performance.
+SaaS Relevance: Well-suited for SaaS applications, such as powering intelligent chatbots, performing sentiment analysis on customer feedback, or automating content generation.
+Future-Proofing: Its scalable architecture supports future enhancements, such as increasing layers to 40 or embedding dimensions to 1408, to meet evolving business requirements.
