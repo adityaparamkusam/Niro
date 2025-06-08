@@ -2,7 +2,6 @@ import random, numpy as np, torch
 from torch.utils.data import Dataset, DataLoader
 from datasets import load_from_disk
 
-# ──────────────────────────────────────────────────────────────────────────────
 class ArrowStreamDataset(Dataset):
     def __init__(self, paths, block_size: int):
         self.datasets   = [load_from_disk(p) for p in paths]
@@ -18,7 +17,7 @@ class ArrowStreamDataset(Dataset):
     def __len__(self):
         return self.total_tokens // self.block_size
 
-    # ------------------------------------------------------------------
+
     def _sample_row(self):
         pick  = random.randint(0, self.total_tokens - 1)
         shard = int(np.searchsorted(self.cum_tokens, pick))
@@ -34,7 +33,7 @@ class ArrowStreamDataset(Dataset):
         y      = torch.tensor(chunk[1:],  dtype=torch.long)
         return x, y
 
-# ──────────────────────────────────────────────────────────────────────────────
+
 def create_loader(paths, m_cfg, t_cfg):
     ds = ArrowStreamDataset(paths, m_cfg.block_size)
     bs = max(1, t_cfg.batch_tokens // m_cfg.block_size)

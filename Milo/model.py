@@ -3,7 +3,7 @@ import torch.nn.functional as F
 import torch.utils.checkpoint as cp
 from .config import ModelConfig
 
-# ──────────────────────────────────────────────────────────────────────────────
+
 class CausalSelfAttention(nn.Module):
     def __init__(self, cfg: ModelConfig):
         super().__init__()
@@ -27,7 +27,7 @@ class CausalSelfAttention(nn.Module):
         y = y.transpose(1, 2).contiguous().view(B, T, C)
         return self.drop(self.proj(y))
 
-# ──────────────────────────────────────────────────────────────────────────────
+
 class Block(nn.Module):
     def __init__(self, cfg):
         super().__init__()
@@ -46,7 +46,7 @@ class Block(nn.Module):
         x = x + self.mlp (self.ln2(x))
         return x
 
-# ──────────────────────────────────────────────────────────────────────────────
+
 class GPT(nn.Module):
     def __init__(self, cfg: ModelConfig):
         super().__init__()
